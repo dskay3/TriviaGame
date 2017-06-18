@@ -88,6 +88,8 @@ function timerReset() {
 
 // Need function to append the question, questionPic, and answers
 
+// Need function to calculate timer and append timer count
+
 // Need function to increase numCorrect if answer is correct and display answerPic
 
 // Need function to increase numIncorrect if answer is incorrect and display incorrect message
