@@ -65,7 +65,11 @@ var trivia5 = {
 // Start button functionality
 function start() {
     var startBtn = '<button type="button" class="center" id="startBtn">Click to Start</button>';
+    // Adds Start btn to the page
     $("#trivia").append(startBtn);
+    // Dynamically adjusts the location of the start button and centers it in the middle of the container
+    $("#startBtn").css("left", ($(".container").width()/2.6) + "px");
+    // Button functionality when selected
     $("button").click(function() {
         $("#startBtn").animate({height:'toggle'});
         playTrivia();
