@@ -37,6 +37,10 @@ html {
     min-height: 100%;
 }
 
+body {
+    background-color: transparent;
+}
+
 .time {
     font-family: HP-Font;
     color: black;
@@ -48,7 +52,6 @@ html {
     display: block;
     font-size: 50px;
     position: absolute;
-    margin-top: 50px;
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
@@ -67,4 +70,17 @@ html {
     0%   {top:290px;}
     50%  {top:300px; font-size:55px;}
     100% {top:290px;}
+}
+
+#questions {
+    display: block;
+    margin-top: 75px;
+}
+
+.choiceBtn {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
