@@ -4,3 +4,8 @@
     font-family: 'HP-Font';
     src: url('../fonts/harryPotter.TTF') format('truetype');
 }
+
+@font-face {
+    font-family: 'HP-ParselTongue-Font';
+    src: url('../fonts/PARSELTO.TTF') format('truetype');
+}

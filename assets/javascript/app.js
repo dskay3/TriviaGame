@@ -56,30 +56,36 @@ var trivia5 = {
 }
 
 // Variables
-var numCorrect = 0;
-var numIncorrect = 0;
-
+var numCorrect;
+var numIncorrect;
 var choiceContainer = ["", "", "", ""];
 var choices = ["", "", "", ""];
 var choiceArr;
-var triviaObj = {
+var triviaObj;
+var intervalId;
+
+// Resets variables
+function reset() {
+    triviaObj = {
         trivia1: trivia1,
         trivia2: trivia2, 
         trivia3: trivia3,
         trivia4: trivia4,
         trivia5: trivia5
-};
+    };
+    numCorrect = 0;
+    numIncorrect = 0;
+}
 
-var intervalId;
-
+// Timer Object
 var timer = {
-    remainingTime: 5,
+    remainingTime: 25,
     reset: function() {
-        timer.remainingTime = 5;
+        timer.remainingTime = 25;
     },
     countDown: function() {
         if (timer.remainingTime > 0) {
-            $("#timerContainer").html("<p>"+ timer.remainingTime + "</p>");
+            $("#timerContainer").html('<p>Remaining Time: <span id="timeLeft">'+ timer.remainingTime + "</span></p>");
         } else {
             // $("#timerContainer").html("<p>No more time!</p>");
             setTimeout(function() {
@@ -104,10 +110,12 @@ function start() {
     // Button functionality when selected
     $("button").click(function() {
         $("#startBtn").animate({height:'toggle'});
+        reset();
         playTrivia();
     });
 }
 
+// Executes start
 start();
 
 // Trivia Game
@@ -132,16 +140,16 @@ var randTopic = function(obj) {
     return result;
 }
 
-// Need function to append the question, questionPic, and answers
+// Generates question and answer choices
 function genQuestion(trivia) {
     // Empties the div
     $("#trivia-row").empty();
 
     var question = $("<div>");
     question.attr("id", "questions");
+    question.addClass("col-sm-12 text-center");
     question.text(trivia.question);
     $("#trivia-row").append(question);
-    $("#questions").css("margin-left", ($(".container").width()/2.75) + "px");
 
     choiceArr = [trivia.answer1, trivia.answer2, trivia.answer3, trivia.correct];
 
@@ -166,7 +174,7 @@ function genQuestion(trivia) {
     });
 }
 
-// Need function to increase numCorrect if answer is correct and display answerPic
+// Executes when selected answer is correct
 function correct() {
     clearInterval(intervalId);
     numCorrect++;
@@ -178,7 +186,7 @@ function correct() {
     console.log("correct count " + numCorrect);
 }
 
-// Need function to increase numIncorrect if answer is incorrect and display incorrect message
+// Executes when selected answer is incorrect
 function incorrect() {
     clearInterval(intervalId);
     numIncorrect++;
@@ -190,18 +198,27 @@ function incorrect() {
     console.log("incorrect count " + numIncorrect);
 }
 
-// Need function to display ending results and replay
+// Displays results and replay button
 function endGame() {
     $("#trivia-row").empty();
 
     var endContainer = $("<div>");
     endContainer.attr("id", "endContainer");
-    endContainer.html("<p>Number Correct: " + numCorrect + "</p>" + "<p>Number Incorrect: " + numIncorrect + "</p>");
+    endContainer.html('<p class="result">Number Correct: ' + numCorrect + "</p>" + '<p class="result">Number Incorrect: ' + numIncorrect + "</p>");
     $("#trivia-row").append(endContainer);
-    clockRunning = false;
+    
+    var replayBtn = $("<button>");
+    replayBtn.attr("id", "replayBtn");
+    replayBtn.text("Click to Play Again");
+    $("#endContainer").append(replayBtn);
+
+    $("#replayBtn").click(function() {
+        reset();
+        playTrivia();
+    });
 }
 
-// Need function to calculate timer and append timer count
+// Creates timer container
 function timerDisplay() {
     var timerContainer = $("<div>");
     timerContainer.attr("id", "timerContainer");
